@@ -1,0 +1,27 @@
+defaultNamespace: traefik-v2
+helm:
+  releaseName: traefik
+  chart: traefik
+  repo: https://helm.traefik.io/traefik
+
+targetCustomizations:
+  - name: prod
+    helm:
+      values:
+        service:
+          spec:
+            loadBalancerIP: 172.27.99.1
+    clusterSelector:
+      matchLabels:
+        env: prod
+
+targetCustomizations:
+  - name: dr
+    helm:
+      values:
+        service:
+          spec:
+            loadBalancerIP: 172.28.99.1
+    clusterSelector:
+      matchLabels:
+        env: dr

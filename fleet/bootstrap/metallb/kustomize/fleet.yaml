@@ -1,0 +1,14 @@
+defaultNamespace: metallb-system
+targetCustomizations:
+  - name: prod
+    clusterSelector:
+      matchLabels:
+        env: prod
+    kustomize:
+      dir: overlays/prod
+  - name: dr
+    clusterSelector:
+      matchLabels:
+        env: dr
+    kustomize:
+      dir: overlays/dr

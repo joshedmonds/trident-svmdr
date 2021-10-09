@@ -1,0 +1,17 @@
+defaultNamespace: trident
+targetCustomizations:
+  - name: prod
+    clusterSelector:
+      matchLabels:
+        env: prod
+    yaml:
+      overlays:
+        - backends/prod
+
+  - name: dr
+    clusterSelector:
+      matchLabels:
+        env: dr
+    yaml:
+      overlays:
+        - backends/dr
