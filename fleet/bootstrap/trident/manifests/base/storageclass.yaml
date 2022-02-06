@@ -7,3 +7,13 @@ parameters:
   backendType: "ontap-nas"
   provisioningType: "thin"
   snapshots: "true"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standard-san
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san"
+  provisioningType: "thin"
+  snapshots: "true"
