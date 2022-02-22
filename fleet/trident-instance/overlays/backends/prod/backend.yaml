@@ -17,10 +17,11 @@ kind: TridentBackendConfig
 metadata:
   name: backend-tbc-ontap-san
 spec:
-  version: 1
   backendName: ontap-san-backend
-  storageDriverName: ontap-san
-  managementLIF: 10.99.72.118
-  svm: cncf-app1
   credentials:
-    name: backend-tbc-ontap-secret
+    name: backend-tbc-ontap-san-secret
+  managementLIF: 10.99.72.118
+  storageDriverName: ontap-san
+  svm: cncf-app1
+  version: 1
+  useCHAP: true
