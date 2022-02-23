@@ -1,4 +1,6 @@
 defaultNamespace: trident
+dependsOn:
+  - bootstrap
 targetCustomizations:
   - name: prod
     clusterSelector:
