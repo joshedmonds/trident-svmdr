@@ -1,6 +1,6 @@
 defaultNamespace: trident
 dependsOn:
-  - name: bootstrap-fleet-bootstrap
+  - name: trident-orchestrator-fleet-trident-orchestrator
 targetCustomizations:
   - name: prod
     clusterSelector:

@@ -1,0 +1,3 @@
+defaultNamespace: trident
+dependsOn:
+  - name: bootstrap-fleet-bootstrap
