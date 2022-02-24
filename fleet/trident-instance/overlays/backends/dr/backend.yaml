@@ -11,3 +11,17 @@ spec:
   svm: cncf-app1-dr
   credentials:
     name: backend-tbc-ontap-secret
+---
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-san
+spec:
+  backendName: ontap-san-backend
+  credentials:
+    name: backend-tbc-ontap-san-secret
+  managementLIF: 10.99.72.128
+  storageDriverName: ontap-san
+  svm: cncf-app1-dr
+  version: 1
+  useCHAP: true
