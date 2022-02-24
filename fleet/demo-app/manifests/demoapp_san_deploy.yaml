@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-nginx-default-conf
+  namespace: demo-app
+data:
+  default.conf: |
+    server {
+        listen       8080;
+        server_name  localhost;
+        location / {
+            root   /data/demo-app;
+            index  index.html index.htm;
+            dav_methods  PUT;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /data/demo-app;
+        }
+    }
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: demo-app-san
+  namespace: demo-app
+  labels:
+    app: demo-app-san
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app-san
+  template:
+    metadata:
+      labels:
+        app: demo-app-san
+    spec:
+      containers:
+        - name: demo-nginx
+          image: nginxinc/nginx-unprivileged
+          volumeMounts:
+            - name: demo-nginx-default-conf
+              readOnly: true
+              mountPath: /etc/nginx/conf.d/
+            - name: demo-app-san
+              mountPath: /data/demo-app
+      volumes:
+        - name: demo-nginx-default-conf
+          configMap:
+            name: demo-nginx-default-conf
+            items:
+              - key: default.conf
+                path: default.conf
+        - name: demo-app-san
+          persistentVolumeClaim:
+            claimName: demo-app-san-pvc
